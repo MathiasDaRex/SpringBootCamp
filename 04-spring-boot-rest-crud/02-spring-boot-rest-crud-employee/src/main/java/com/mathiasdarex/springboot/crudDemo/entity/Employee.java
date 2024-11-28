@@ -25,7 +25,7 @@ public class Employee {
 
     // define constructors
 
-    public Employee(int id) {
+    public Employee() {
     }
 
     public Employee(String firstName, String lastName, String email) {
