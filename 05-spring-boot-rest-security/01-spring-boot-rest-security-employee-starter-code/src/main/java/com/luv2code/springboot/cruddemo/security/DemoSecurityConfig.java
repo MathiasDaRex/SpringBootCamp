@@ -16,10 +16,26 @@ public class DemoSecurityConfig {
 
     // add support for JDBC ... no more hardcoded users!
 
+    // here is how to set up custom table and collumn names.
+    // nothing here is matched with default Spring Security table schema.
+    // We simply tell Spring Security how to access it.
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
 
-        return new JdbcUserDetailsManager(dataSource);
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+
+        // define query to retrieve a user by username
+        jdbcUserDetailsManager.setUsersByUsernameQuery(
+                // how to find users table
+                "select user_id, pw, active from members where user_id=?"
+        );
+
+        // define query to retrive the authorities/roles by username
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                "select user_id, role from roles where user_id=?"
+        );
+
+        return jdbcUserDetailsManager;
     }
 
     @Bean
