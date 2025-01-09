@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator page</title>
+</head>
+<body>
+    <h1>Please enter two numbers, to add them together</h1>
+    <form th:action="@{/calculate}" method="GET">
+        <input type="number" name="x1" placeholder="First number">
+        <input type="number" name="x2" placeholder="Second number">
+        <input type="submit">
+
+    </form>
+
+
+</body>
+</html>

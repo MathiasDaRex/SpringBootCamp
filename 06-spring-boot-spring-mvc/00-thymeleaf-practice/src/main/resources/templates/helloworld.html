@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf hello world</title>
+</head>
+<body>
+
+    Hi dude, we use thymeleaf now with spring
+    <br><br>
+
+    <p th:text="'Time on the server is ' + ${theDate}"/>
+
+    <br><br>
+
+    <p>If you want to calculate click on the button</p>
+    <a href="/showForm">I WANT TO CALCULATE</a>
+
+    <br><br>
+
+    YOUR NUMBERS SUM IS : <span th:text="${sum}"/>
+</body>
+</html>
