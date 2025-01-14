@@ -32,7 +32,15 @@
 
     <br><br>
 
+    Favorite Programming Language:
 
+    <!-- th:field - Binding property on student object th:value - value sent at submission -->
+    <input type="radio" th:field="*{favoriteLanguage}" th:value="Go">Go</input>
+    <input type="radio" th:field="*{favoriteLanguage}" th:value="Java">Java</input>
+    <input type="radio" th:field="*{favoriteLanguage}" th:value="Python">Python</input>
+
+
+    <br><br>
 
     <!-- When form is submitted, spring MVC will create a new Student instance, and add to the moden then calll
          student.setFirstName(...), student.setLastName(...)
