@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student form</title>
+</head>
+<body>
+
+  <h3>Student Registration Form</h3>
+
+
+  <!-- th:object="${student}" student is the name of model attribute in the controller -->
+
+  <form th:action="@{/processStudentForm}" th:object="${student}" method="POST">
+
+    First name: <input type="text" th:field="*{firstName}"/>
+
+    <br><br>
+
+    Last name: <input type="text" th:field="*{lastName}"/>
+
+    <br><br>
+
+    Country:
+
+    <select th:field="*{country}">
+
+      <option th:value="Brazil">Brazil</option>
+      <option th:value="France">France</option>
+      <option th:value="Germany">Germany</option>
+      <option th:value="India">India</option>
+      <option th:value="China">China</option>
+
+    </select>
+
+    <br><br>
+
+
+
+    <!-- When form is submitted, spring MVC will create a new Student instance, and add to the moden then calll
+         student.setFirstName(...), student.setLastName(...)
+     -->
+    <input type="submit" value="Submit"/>
+
+  </form>
+
+
+</body>
+</html>

@@ -3,6 +3,8 @@ package com.mathiasdarex.springboot.thymeleafdemo.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -11,7 +13,7 @@ public class HelloWorldController {
 
     // need a controller method to show initial HTML form
 
-    @RequestMapping("/showForm")
+    @GetMapping("/showForm")
     public String showForm() {
         return "helloworld-form";
     }
@@ -48,8 +50,10 @@ public class HelloWorldController {
     // instead of passing in the HttpServletRequest, we make use of the @RequestParam annotation
     // to bind the HTML form field "studentName"-s value to "TheName". Spring automatically does that.
 
-    @RequestMapping("/processFormVersionThree")
+    @PostMapping("/processFormVersionThree")
     public String processFormVersionThree(@RequestParam("studentName") String theName, Model model) {
+
+        // here spring automatically reads the studentName from the model
 
         // convert the data to all caps
         theName = theName.toUpperCase();
