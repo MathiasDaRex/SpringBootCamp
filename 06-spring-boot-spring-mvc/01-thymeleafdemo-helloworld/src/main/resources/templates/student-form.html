@@ -24,13 +24,10 @@
     Country:
 
     <select th:field="*{country}">
-
-      <option th:value="Brazil">Brazil</option>
-      <option th:value="France">France</option>
-      <option th:value="Germany">Germany</option>
-      <option th:value="India">India</option>
-      <option th:value="China">China</option>
-
+      <!-- We can loop over the list of countries. tempCountry is a temp loop variable
+           th:value is the value sent during form submission, th:text is the text displayed to the user.
+      -->
+      <option th:each="tempCountry : ${countries}" th:value="${tempCountry}" th:text="${tempCountry}"/>
     </select>
 
     <br><br>
