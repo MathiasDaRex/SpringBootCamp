@@ -19,5 +19,15 @@
   <!-- th:text="${student.favoriteLanguage}" calls student.getFavoriteLanguage() -->
   Favorite Programming Language: <span th:text="${student.favoriteLanguage}"/>
 
+  <br><br>
+
+ <!-- Favorite Operating Systems: <span th:text="${student.favoriteSystems}"/> - we can make a bullet list instead of braces list -->
+
+  Favorite Operating Systems:
+
+  <ul>
+    <li th:each="tempSystem : ${student.FavoriteSystems}" th:text="${tempSystem}" />
+  </ul>
+
 </body>
 </html>

@@ -24,8 +24,11 @@
     Country:
 
     <select th:field="*{country}">
-      <!-- We can loop over the list of countries. tempCountry is a temp loop variable
-           th:value is the value sent during form submission, th:text is the text displayed to the user.
+      <!-- We can loop over the list of countries.
+           tempCountry/tempLang is a temp loop variable
+           th:value is the value sent during form submission
+           th:text is the text displayed to the user.
+           th:field is a Binding property on Student object
       -->
       <option th:each="tempCountry : ${countries}" th:value="${tempCountry}" th:text="${tempCountry}"/>
     </select>
@@ -38,6 +41,18 @@
                         th:each="tempLang : ${languages}"
                         th:value="${tempLang}"
                         th:text="${tempLang}" />
+
+
+    <br><br>
+
+    Favorite Operating Systems:
+
+    <!-- if a value has spaces, we must put it in single quotes -->
+
+    <input type="checkbox" th:field="*{favoriteSystems}" th:value="Linux">Linux</input>
+    <input type="checkbox" th:field="*{favoriteSystems}" th:value="macOS">macOS</input>
+    <input type="checkbox" th:field="*{favoriteSystems}"
+                           th:value="'Microsoft Windows'">Microsoft Windows</input>
 
 
     <br><br>
