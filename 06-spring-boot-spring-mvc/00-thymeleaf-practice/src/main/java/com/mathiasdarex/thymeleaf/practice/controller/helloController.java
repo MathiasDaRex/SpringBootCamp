@@ -35,7 +35,7 @@ public class helloController {
         // add it to the model
         model.addAttribute("sum", x3);
 
-        return "helloworld";
+        return "result";
     }
 
 
