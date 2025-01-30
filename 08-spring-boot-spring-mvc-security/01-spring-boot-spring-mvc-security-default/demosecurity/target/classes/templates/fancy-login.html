@@ -26,13 +26,18 @@
                                 <div class="form-group">
                                     <div class="col-xs-15">
                                         <div>
-                                            <!-- Check for login error -->
 
                                             <div>
-
+                                                <!-- Check for login error -->
                                                 <div th:if="${param.error}" class="alert alert-danger col-xs-offset-1 col-xs-10">
                                                     Invalid username and password.
                                                 </div>
+
+                                                <!-- Check for logout -->
+                                                <div th:if="${param.logout}" class="alert alert-success col-xs-offset-1 col-xs-10">
+                                                    You have been logged out.
+                                                </div>
+
 
                                             </div>
                                         </div>
