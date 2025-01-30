@@ -1,0 +1,35 @@
+
+
+- Make a custom login form
+Custom login form development process
+
+1. Modify Spring Security Configuration to reference custom login form
+
+2. Develom a controller to show it
+
+3. Create custom login form
+
+    - HTML, CSS, Bootstrap
+
+for the login page we must make a controller,
+but for the loginProcesingURL it's not required, we get it for free
+loginProcesingURL will be handled by the Spring Security Filters
+
+We send form data to the processing url we configured, must be POST
+
+Spring Security defines default names for login form fields
+
+  for user names:  username
+  for passwords:   password
+
+Context path, context root
+the root path for the web application.
+Context Root: my-ecommerce-app
+http://localhost:8080/my-ecommerce-app
+
+@ <- gives us access to context  path dynamically
+we can add that to links, like form submissions
+if we change the context path the links will still work
+much better then hard coding the context path
+
+Recommended to use it, best practice!
