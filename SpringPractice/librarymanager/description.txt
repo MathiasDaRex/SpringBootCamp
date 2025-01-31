@@ -1,0 +1,41 @@
+Feladat: Könyvtár Katalógus Alkalmazás
+Készíts egy egyszerű könyvtár katalógus alkalmazást Spring Boot és Thymeleaf segítségével.
+Az alkalmazás a következő funkciókat tartalmazza:
+    Könyvek listázása
+    Új könyv hozzáadása
+    Könyv részleteinek megtekintése
+
+Lépések
+    Projekt létrehozása
+    Hozz létre egy új Spring Boot projektet a Spring Initializr segítségével.
+    álaszd ki a következő függőségeket:
+        Spring Web
+        Thymeleaf
+
+Model létrehozása
+    Készíts egy Book osztályt a következő attribútumokkal:
+        id (Long)
+        title (String)
+        author (String)
+        publicationYear (Integer)
+
+Service réteg
+    Hozz létre egy BookService osztályt, amely egy List<Book>-ot kezel memóriában.
+     Implementáld a következő metódusokat:
+        getAllBooks()
+        addBook(Book book)
+        getBookById(Long id)
+Controller létrehozása
+    Készíts egy BookController osztályt a következő végpontokkal:
+        GET "/books" - könyvek listázása
+        GET "/books/add" - új könyv űrlap megjelenítése
+        POST "/books/add" - új könyv hozzáadása
+        GET "/books/{id}" - könyv részleteinek megtekintése
+
+Thymeleaf sablonok
+    Hozz létre Thymeleaf sablonokat a következő nézetekhez:
+        books.html - könyvek listája
+        add-book.html - új könyv hozzáadása űrlap
+        book-details.html - könyv részletei
+        Stílus hozzáadása (opcionális)
+        Adj hozzá egyszerű CSS stílusokat a HTML oldalakhoz, hogy javítsd a megjelenést.
