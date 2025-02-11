@@ -84,3 +84,31 @@ Display content based on roles
 
     sec:authorize="hasRole('MANAGER')" to show something only for the MANAGER roled users
     this only generated in the final HTML, when the user is authorized
+
+
+Database Access
+    Spring Security can read user account info from the database
+    By default we have to follow Spring Security's predefined table schemas
+    we have this out of the box, and with JDBC support, we have very little code to write
+
+    data schema:
+        users
+            username
+            password
+            enabled
+        authorities
+            username
+            authority <- internally spring security uses "ROLE_" prefix
+
+    we can also customize the table schemas, useful if we have custom tables
+    that's specific to our project
+    with this we are responsible for developing the code to access the data
+        - JDBC, JPA/Hibernate
+
+    1 - Develop SQL Script to set up database tables
+
+    2 - Add database support to Maven POM file
+
+    3 - Create JDBC properties file
+
+    4 - Update Spring Security Configuration to use JDBC for authentication and authorization
