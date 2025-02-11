@@ -33,3 +33,33 @@ if we change the context path the links will still work
 much better then hard coding the context path
 
 Recommended to use it, best practice!
+
+Spring security magic:
+    we have ?error param if we have a login error
+    we have ?logout param lo log out
+
+    -   Send data with submit button to default logout URL /logout
+        logout URL will be handled by Spring Security Filters
+        no coding required, Spring Security will provide it for free
+        we must POST our data across to that endpoint with a submit button
+
+        when logout is processed, by default Spring Security will
+         - invalidate users HTTP session and removes session cookies, ect
+         - send back to login page
+         - append logout parameter: ?logout
+
+Restrict access based on user Roles
+    1 - Create supporting controller code and view pages
+        homepage - EMPLOYEE, MANAGER, ADMIN
+        /leaders - MANAGER, ADMIN
+        /systems - ADMIN
+
+    2 - restrict access based on Roles
+        updates spring security java config file
+        general syntax
+            requestMatchers(<< add a path to match >>).hasRole(<< authorized role >>)
+            or multiple roles, we can add comma-delimited list ("ADMIN","DEV","VIP"...)
+            requestMatchers(<< add a path to match >>).hasAnyRole(<< list of authorized roles >>)
+
+            to match all sub-directories of systems we use: ("/systems/**")
+            requestMatchers(/systems/**).hasRole("ADMIN")
