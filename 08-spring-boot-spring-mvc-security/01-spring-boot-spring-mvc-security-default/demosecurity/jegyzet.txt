@@ -63,3 +63,17 @@ Restrict access based on user Roles
 
             to match all sub-directories of systems we use: ("/systems/**")
             requestMatchers(/systems/**).hasRole("ADMIN")
+
+Custom access denied page
+    1 - Configure custom page for access denied
+        we make an exception if the user cannot access the given page,
+        and show our own error page for that
+
+        .exceptionHandling(configurer ->
+                configurer
+                    .accessDeniedPage("/access-denied")
+                    );
+
+    2 - Create supporting controller code and view page
+        we put our controller to the loginController, cuz it's more security related.
+        but we can put it anywhere
