@@ -77,3 +77,10 @@ Custom access denied page
     2 - Create supporting controller code and view page
         we put our controller to the loginController, cuz it's more security related.
         but we can put it anywhere
+
+Display content based on roles
+    if we don't even want to show some things on our page, we can add rules to show them
+    only for the authorized users.
+
+    sec:authorize="hasRole('MANAGER')" to show something only for the MANAGER roled users
+    this only generated in the final HTML, when the user is authorized
