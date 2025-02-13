@@ -1,0 +1,90 @@
+Advanced Mappings
+	in the database, we most likely will have
+		- multiple tables
+		- Relationships between tables
+	Need to model this with hibernate
+	
+One-to-One Mapping
+	An instructor can have an "instructor detail" entity
+	similar to an "instructor profile"
+
+One-to-Many Mapping
+	An instructor can have many courses
+
+Many-to-One
+	Many courses can map to one instructor
+	
+Many-to-Many
+	A course can have may students
+	A student can have many courses
+	
+Primary Key and Foreign Key
+	Primary key: identify a unique row in a table
+	
+	Foreign key - Link tables together
+				- a field in one table that refers to primary key in
+				  another table
+				
+Cascade
+	We can cascade operations
+	Apply the same operation to related entities.
+	if we save our instructor, it cascades and does the same
+	operation in Instructor Detaul
+	
+	if we delete an instructor, we should also delete the
+	instructor_detail
+	this is CASCADE DELETE
+	
+	it really depends on the situation,
+	if we have students to courses, we shouldn't delete the courses also
+	
+Fetch types: Eagre vs Lazy Loading
+	when we fetch/retrieve data, should we retrieve EVERYTHING?
+		- Eager will retrieve everything
+		- Lazy will retrieve on request
+	if we have an instructor with multiple courses, should we retrieve
+	everything, or only on request?
+
+Uni-directional: one way relationship.
+	we load the instructor, from that we can access the instructor detail
+
+Bi-directional: two way relationship
+	we load the instructor, from that we can access the instructor detail,
+	but we can also reference the instructor from the instructor detail
+	
+More on foreign key
+	- Main purpose is to preserve relationship between tables
+		Referential integrity
+		
+	- Prevents operations that would destroy relationship
+	- Ensures only valid data is inserted into the foreign key column
+		can only contain valid reference to primary key in other table
+
+Development process: one-to-one
+	1 - prep work - define database tables
+	2 - create IntstructorDetail class
+	3 - Create Instructor class
+	4 - Create Main App
+		- we will create Spring Boot command line app
+		- leverage our DAO pattern as in previous
+	
+Entity Lifecycle
+	Operations 	-	Desription
+	Detach			If entity is detached, it's not associated with a Hibernate session
+	Merge 			If instance is detached from session, then merge will reattach to session
+	Persist			Transitions new instances to managed state. next flush/commit will save in db
+	Remove			Transitions managed entity to be removed. next flush/commit will delete from db
+	Refresh 		Reload/synch object with data from db. prevents stale data
+
+visualisation : pt.275 3:55
+
+
+@OneToOne - cascade types
+	PERSIST 		if entity is persisted/saved, related entity will also be persisted/saved
+	REMOVE 			if entity is removed/deleted, related entity will also be deleted
+	REFRESH 		if entity is refreshed, related entity will also be refreshed
+	DETACH			if entity is detached(not associated w/ session), then related entity will also be detached
+	MERGE			if entity is merged, then related entity will also be merged
+	ALL 			All of above cascade types
+
+By default, no operations are cascaded
