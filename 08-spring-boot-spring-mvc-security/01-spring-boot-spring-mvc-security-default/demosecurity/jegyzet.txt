@@ -112,3 +112,57 @@ Database Access
     3 - Create JDBC properties file
 
     4 - Update Spring Security Configuration to use JDBC for authentication and authorization
+
+password storage
+    storing our passwords as plain text is not good for real projects.
+    the best practice is to store them in an encrypted format.
+
+    Spring Security recommends using bcrypt algorithm
+    bcrypt:
+        performs one-way encrypted hashing
+        adds a random salt to the password for additional protection
+        includes support to defeat brute force attacks
+
+        why use bcrypt: https://danboterhoven.medium.com/why-you-should-use-bcrypt-to-hash-passwords-af330100b861
+        detailed analysis: https://en.wikipedia.org/wiki/Bcrypt
+        pwd hashing best practices:  https://crackstation.net/hashing-security.htm
+
+        how to use bcrypt:
+            1 - use a website utility to perform the encryption - https://www.bcryptcalculator.com/
+                multiple runs will generate a different password due to random password salting
+
+            2 - write java code to perform the encryption
+
+    development process:
+        1 - run SQL script that contains encryptet passwords
+            modify DDL for the password field, length should be 68
+            {bcrypt} - 8chars, encodedPwd - 60chars
+            the password from db is NEVER decrypted. it's a one way algorithm
+
+Custom tables for Spring Security
+    if we have our own tables, and want to use them, not the default Spring Security schema
+
+    for this we need to:
+        - tell spring how to query your custom tables
+        - provide query to find user by user name
+        - provide query to find authorities/roles by user name
+
+    Development process
+        1 - Create our custom tables with SQL
+        2 - update Spring Security Configuration
+            - provide query to find user by user name
+            - provide query to find authorities/roles by user name
+
+How to use JPA/Hibernate with Spring Security:
+    an exercise for that:
+    https://www.luv2code.com/downloads/udemy-spring-boot-3/bonus-spring-boot-spring-mvc-security-jpa-hibernate-bcrypt/bonus-lecture-spring-boot-spring-mvc-security-security-jpa-hibernate-bcrypt.pdf
+    source code:
+    https://www.luv2code.com/bonus-lecture-spring-mvc-security-jpa-hibernate-bcrypt-code
+
+How to make user registration form:
+    https://www.luv2code.com/downloads/udemy-spring-boot-3/bonus-lecture-spring-boot-spring-mvc-security-user-registration/bonus-lecture-spring-boot-spring-mvc-security-user-registration.pdf
+    https://www.luv2code.com/bonus-lecture-spring-boot-spring-mvc-security-user-registration-code
+
+How to create a landing page that's accessable to everyone:
+    https://www.luv2code.com/downloads/udemy-spring-boot-3/bonus-lecture-spring-boot-spring-mvc-security-landing-page/bonus-lecture-spring-boot-spring-mvc-security-landing-page.pdf
+    https://www.luv2code.com/downloads/udemy-spring-boot-3/bonus-lecture-spring-boot-spring-mvc-security-landing-page/bonus-code-spring-boot-spring-mvc-security-landing-page.zip
