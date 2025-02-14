@@ -4,9 +4,11 @@ import com.mathiasdarex.spring_security_mvc_crud_user_reg_login.entity.Role;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Type;
 
+@Repository
 public class RoleDaoImp implements RoleDao{
 
     @Autowired
