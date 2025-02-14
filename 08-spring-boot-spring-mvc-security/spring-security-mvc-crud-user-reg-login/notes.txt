@@ -1,0 +1,7 @@
+create entites
+create web user
+create dao
+create service
+create security
+create controllers
+create thymeleaf frontend
