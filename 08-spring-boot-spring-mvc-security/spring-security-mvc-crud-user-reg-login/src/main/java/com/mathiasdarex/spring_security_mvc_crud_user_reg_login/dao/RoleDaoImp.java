@@ -8,6 +8,16 @@ import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Type;
 
+/*
+- Implements RoleDao interface
+- Uses JPA EntityManager for database operations
+- @Repository annotation for Spring Data access
+- Constructor and field injection of EntityManager
+- findRoleByName method:
+  * Queries database for role by name
+  * Returns null if role not found or on exception
+*/
+
 @Repository
 public class RoleDaoImp implements RoleDao{
 

@@ -8,6 +8,17 @@ import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Type;
 
+/*
+- Implements UserDao interface
+- Uses JPA EntityManager for database operations
+- @Repository annotation for Spring Data access
+- Constructor injection of EntityManager
+- findUserByName method:
+  * Queries database for enabled user by username
+  * Returns null if user not found or on exception
+- save method: Not implemented yet
+*/
+
 @Repository
 public class UserDaoImp implements UserDao{
 
