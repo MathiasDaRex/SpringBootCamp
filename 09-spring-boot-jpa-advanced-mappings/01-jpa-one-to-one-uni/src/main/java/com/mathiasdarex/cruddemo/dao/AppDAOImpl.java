@@ -18,6 +18,8 @@ public class AppDAOImpl implements AppDAO{
         this.entityManager = entityManager;
     }
 
+    // !!! IF WE MAKE A MODIFICATION TO THE DATABASE WE MUST USER @Transactional
+
     @Override
     @Transactional
     public void save(Instructor theInstructor) {
@@ -31,5 +33,17 @@ public class AppDAOImpl implements AppDAO{
     @Override
     public Instructor findInstructorById(int theId) {
         return entityManager.find(Instructor.class, theId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteInstructorById(int theId) {
+
+        // retrieve the instructor
+        Instructor tempInstructor = entityManager.find(Instructor.class, theId);
+
+        // delete the instructor
+        entityManager.remove(tempInstructor);
+
     }
 }
