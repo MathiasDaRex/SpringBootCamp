@@ -18,10 +18,23 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 		return runner -> {
-			createInstructor(appDAO);
+			// createInstructor(appDAO);
+
+			findInstructor(appDAO);
+
 		};
 	}
 
+	private void findInstructor(AppDAO appDAO) {
+
+		int theId = 2;
+		System.out.println("Finding instructor id: " + theId);
+
+		Instructor thempInstructor = appDAO.findInstructorById(theId);
+
+		System.out.println("tempInstructor: " + thempInstructor);
+		System.out.println("The associated instructorDetail only: ");
+	}
 	private void createInstructor(AppDAO appDAO) {
 
 //		// create the instructor
