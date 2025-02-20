@@ -24,7 +24,9 @@ public class InstructorDetail {
     @Column(name = "hobby")
     private String hobby;
 
-    @OneToOne(mappedBy = "instructorDetail", cascade = CascadeType.ALL)
+    // if we want to only delete the Instructor detail, we have to choose everything except REMOVE
+    @OneToOne(mappedBy = "instructorDetail",
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Instructor instructor;
 
     public InstructorDetail() {
