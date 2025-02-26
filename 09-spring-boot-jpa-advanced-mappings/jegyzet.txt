@@ -88,3 +88,43 @@ visualisation : pt.275 3:55
 	ALL 			All of above cascade types
 
 By default, no operations are cascaded
+
+Bi-Directional
+	If load an IntstructorDetail object, and we'd like to get the associated Instructor
+	We can't do that, because it's currently a uni-directional relationship  
+	Instructor->IntstructorDetail
+
+	Bi-directional relationship is the solution
+	Instructor<->IntstructorDetail
+
+	To use Bi-Directional we can keep the existing database schema
+	No changes required for the database, simply update the java code
+
+	Dev process:
+	1 - Make updates to InstructorDetail class
+		- Add new field to reference Instructor
+		- Add getter/setter methods for Instructor
+		- Add @OneToOne annotation		--- 	
+		@OneToOne(mappedBy("instructorDetail") <- Refers to "instructorDetail" property in "Instructor" class
+	2 - Create main App
+	
+	mappedBy tells Hibernate 
+		Look at the InstructorDetail property in the Instructor class
+		Use information from the Instructor class @JoinColumn
+		To help find associated instructor
+
+Cascade Delete InstructorDetail->Instructor object
+
+If we only want to delete the InstructorDetail object, we have to mdify the cascade type on the InstructorDetail entiy
+by not adding CascadeType.DELETE
+
+
+Fetch Types: Eager vs Lazy Loading
+	When we fetch/retrieve data, should we retrieve EVERYTHING?
+	This can effect our applications performance
+		- Eager will retrieve everything
+		- Lazy will retrieve on request only
+		
+	Eager Loading
+		- Eager loading will load all dependent entites
+			- Load instructor and all of their courses at once
