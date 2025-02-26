@@ -40,7 +40,7 @@ public class Instructor {
     // adding courses list to Instructors
     // mabbedBy refers to "instructor" propery in "Course" class
     @OneToMany(mappedBy = "instructor",
-                fetch = FetchType.EAGER,
+                fetch = FetchType.LAZY,
                 cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     private List<Course> courses;
 
