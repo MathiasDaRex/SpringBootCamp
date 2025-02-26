@@ -128,3 +128,42 @@ Fetch Types: Eager vs Lazy Loading
 	Eager Loading
 		- Eager loading will load all dependent entites
 			- Load instructor and all of their courses at once
+			
+			if we load courses, and Eager load every student on it, that can turn a performance nightmare
+	
+	BEST PACTICE - ONLY LOAD DATA WHEN IT'S ABSOLUTELY NEEDED
+	prefer Lazy loading instead of Eager loading
+	
+	
+	Lazy Loading
+		- Lazy loading will load the main entity first
+			- Load dependent entities on demand
+			
+	Real world use case: a searching page for instructors
+		
+		on the Master View we can search instructors by name, and have a button for detailed view.
+		so we only load the instructors first.(LAZY)
+		
+		on the Detail View we retrieve the entity and neccessary dependent entities.
+		so Load Instructor AND their Courses
+	
+	When we define the mapping relationship, we can specify the fetch type: EAGER or LAZY
+		public class Instructor {	
+		...
+			@OneToMany(fetch=FetchType.LAZY, mappedBy="instructor")
+			private List<Course> courses;
+		...
+	}
+	
+	Default Fetch Types 
+		@OneToOne - FetchType.EAGER
+		@OneToMany - FetchType.LAZY
+		@ManyToOne - FetchType.EAGER
+		@ManyToMany - FetchType.LAZY
+		
+	More about Lazy Loading
+		When we lazy load, the data is only retrieved on demand
+		However, this requires an open Hibernate session
+			- need a connection to database to retrieve data
+		If Hibernate session is closed, and we attempt to retrieve lazy data
+			- Hibernate will throw an exception
