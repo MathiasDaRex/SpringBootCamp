@@ -24,7 +24,7 @@ public class AppDAOImpl implements AppDAO{
         this.entityManager = entityManager;
     }
 
-    // !!! IF WE MAKE A MODIFICATION TO THE DATABASE WE MUST USER @Transactional
+    // !!! IF WE MAKE A MODIFICATION TO THE DATABASE WE MUST USE @Transactional
 
     @Override
     @Transactional
@@ -47,6 +47,14 @@ public class AppDAOImpl implements AppDAO{
 
         // retrieve the instructor
         Instructor tempInstructor = entityManager.find(Instructor.class, theId);
+
+        // get the courses
+        List<Course> courses = tempInstructor.getCourses();
+
+        // break association of courses for the instructor
+        for (Course tempCourse : courses) {
+            tempCourse.setInstructor(null);
+        }
 
         // delete the instructor
         entityManager.remove(tempInstructor);

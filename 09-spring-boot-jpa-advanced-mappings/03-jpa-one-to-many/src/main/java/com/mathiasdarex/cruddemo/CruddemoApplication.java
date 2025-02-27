@@ -41,7 +41,9 @@ public class CruddemoApplication {
 
 			// updateInstructor(appDAO);
 
-			updateCourse(appDAO);
+			// updateCourse(appDAO);
+
+			deleteInstructor(appDAO);
 
 		};
 	}
@@ -195,6 +197,7 @@ public class CruddemoApplication {
 		appDAO.deleteInstructorById(theId);
 
 		System.out.println("Instructor with id " + theId + " deleted");
+		System.out.println("The courses now don't have associated instructor....");
 	}
 
 	private void findInstructor(AppDAO appDAO) {
