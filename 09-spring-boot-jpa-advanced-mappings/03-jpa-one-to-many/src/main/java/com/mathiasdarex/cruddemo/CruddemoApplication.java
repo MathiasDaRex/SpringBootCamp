@@ -35,8 +35,26 @@ public class CruddemoApplication {
 
 			// findInstructorWithCourses(appDAO);
 
-			findCoursesForInstructor(appDAO);
+			//findCoursesForInstructor(appDAO);
+
+			findInstructorWithCoursesJoinFetch(appDAO);
+
 		};
+	}
+
+	private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
+
+		int theId = 1;
+
+		// find instructor
+		System.out.println("Finding instructor id: " + theId);
+		// code will retrieve Instructor AND Courses because we added JOIN FETCH in our query in DAOImpl
+		Instructor tempInstructor = appDAO.findInstructorByIdJoinFetch(theId);
+
+		System.out.println("tempInstructor: " + tempInstructor);
+		System.out.println("the associated courses: " + tempInstructor.getCourses());
+
+		System.out.println("DONE!");
 	}
 
 	private void findCoursesForInstructor(AppDAO appDAO) {
