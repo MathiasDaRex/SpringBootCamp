@@ -167,3 +167,15 @@ Fetch Types: Eager vs Lazy Loading
 			- need a connection to database to retrieve data
 		If Hibernate session is closed, and we attempt to retrieve lazy data
 			- Hibernate will throw an exception
+			
+
+@OneToMany: Uni-directional
+	A course can have many reviews
+	Uni-directional
+		Course -> review
+			   -> review
+			   -> review
+	Real-world project requirement:
+		if we delete a course, also delete the reviews
+		Reviews without a course ... has no meaning
+		so we can add support for all cascade types, even delete
