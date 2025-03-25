@@ -3,6 +3,7 @@ package com.mathiasdarex.cruddemo.dao;
 import com.mathiasdarex.cruddemo.entity.Course;
 import com.mathiasdarex.cruddemo.entity.Instructor;
 import com.mathiasdarex.cruddemo.entity.InstructorDetail;
+import com.mathiasdarex.cruddemo.entity.Student;
 
 import java.util.List;
 
@@ -35,5 +36,7 @@ public interface AppDAO {
     Course findCourseAndReviewsByCourseId(int theId);
 
     Course findCourseAndStudentsByCourseId(int theId);
+
+    Student findStudentAndCoursesByStudentId(int theId);
 
 }
