@@ -1,0 +1,160 @@
+If we have a system with many classes, and we want to add logging in maybe, we don't have to write that code in every classes
+instead we can use AOP, which based on the concept of Aspect
+	- Aspect encapsulates cross-cutting logic
+	
+		Cross-Cutting Concerns <-> Cross-Cutting logic or functionality
+	
+	- "Concern" means logic/functionality <- like basic infrastructure code that all applications will need
+	
+	We can encapsulate a common logic an apply it accordingly aswe want between like the Controller and service layer, or service and DAO layer
+	
+Benefits of AOP
+	- Code for Aspect is defined in a single class
+		- much better than being scattered everywhere
+		- promotes code reuser and easier change
+		
+	- Business code in your application is cleaner
+		- only applies to business functionality: addAccount
+		- Reduces code complexity 
+		
+	- Configurable
+		- Based on configuration, apply Aspects selectively to different parts of app
+		- No need to make changes to main application code ... very important
+		
+Additional AOP use cases
+	- Most common
+		- Logging, security, transactions
+	
+	- Audit logging
+		- who, what, when, where
+	
+	- Exception handling
+		- Log exception and notify DevOps team via SMS/email
+	
+	- API management
+		- How many times has a method been called user
+		- Analytics:  what are peak times? what is avarage load? who is top user?
+
+AOP terminology
+	- Aspect: module of code for a cross-cutting concern (logging, security...)
+	
+	- Advice: What action is taken and when it should be applied
+	
+	- Join Point: When to apply code during program execution
+	
+	- Pointcut: A predicate expression for where advice should be applied
+	
+Advice Types:
+	- Before advice: run before the method
+	
+	- After finally advice: run after the method (finally)
+	
+	- After returning advice: run after the method (success execution)
+	
+	- After throwing advice: run after method (if exception thrown)
+	
+	- Around advice: run before and after method
+	
+Weaving
+	- Connecting aspects to target objects to create an advised object
+	- Different types of weaving:
+		-compile-time, load-time, run-time
+		
+	Regarding performance: run-time weaving is the slowest
+	
+AOP Frameworks
+	-Spring AOP
+	-AspectJ
+	
+	Spring AOP
+		-Spring provides AOP support
+		-Key component of Spring
+			- security, transactions, caching ect
+		- Uses run-time weaving of aspects
+		
+		Main App <-> AOP Proxy <-LoggingAspect,SecurityAspect-> Target Object
+	
+	AspectJ
+		- Original AOP framework from 2001 -> www.eclipse.org/aspectj
+		- Complete support for AOP
+		- Rich support for 
+			- join points: method-level, constructor, field
+			- code weaving: compile-time, post compile-time, load-time 
+			
+	Comparison
+		Spring AOP 
+			
+			Advantages: 
+				- Simpler to use than AspectJ
+				- Uses Proxy pattern
+				- Can migrate to AspectJ when using @Aspect annotation
+			
+			Disatvantages: 
+				- Only supports method-level join points
+				- Can only apply aspects to beans created by Spring app context
+				- Minor performance cost for aspect execution(run-time weaving)
+				
+		AspectJ
+		
+			Advantages:
+				- Support all join points
+				- Works with any POJO, not just beans from app context
+				- Faster performante compared to SpringAOP
+				- Complete AOP support
+				
+			Disatvantages:
+				- Compile-time weaving requires extra compilation step
+				- AspectJ pointcut syntax can become complex
+				
+		Comparing SpringAOP and AspectJ
+			
+			- SpringAOP only supports
+				- Method-level join points
+				- Run-time code weaving (slower than AspectJ)
+			
+			- AspectJ supports
+				- join points: method-level, constructor, field
+				- weaving: compile-time, post compile-time and load-time
+				
+			Spring AOP is a light implementation of AOP
+			Solves common problems in enterprise applications
+			
+			it's recommended to start with SpringAOP, and if we have complex requirements then move to AspectJ
+-------------
+Best practices: Aspect and Advices
+
+	- Keep the code small
+	- Keep the code fast
+	- Do not perform any expensive/slow operation
+	- Get in and out as QUICKLY as posibble
+
+-------------
+
+
+
+@Before Advice - interaction 
+	we want to Run custom code BEFORE the target object method call 
+	
+	Main app <-> AOP proxy <- LoggingAspect, SecurityAspect -> Taget Object
+	
+	we just have to add @Before annotation before the method of a given object
+	
+	TargetObject
+		@Before
+		public void doStuff(){
+		...
+		}
+	
+	Use Cases
+		- Most common: Logging, security, transactions
+		- Audit logging: who,what,when,where
+		- Api management: peak times? avarage load? who is top user? ect
+
+	Sring Boot AOP Starter
+	We have this dependency basically so it's automatically enabled
+	
+	Dev process - @Before
+	
+	1 create target object: AccountDAO
+	2 create main App
+	3 create Aspect with @Before advice
