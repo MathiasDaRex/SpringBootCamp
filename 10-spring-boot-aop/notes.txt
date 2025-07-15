@@ -121,13 +121,14 @@ AOP Frameworks
 			
 			it's recommended to start with SpringAOP, and if we have complex requirements then move to AspectJ
 -------------
-Best practices: Aspect and Advices
+!!!!!!!!!!!!!
+	BEST PRACTICES: Aspect and Advices
 
 	- Keep the code small
 	- Keep the code fast
 	- Do not perform any expensive/slow operation
 	- Get in and out as QUICKLY as posibble
-
+!!!!!!!!!!!!!
 -------------
 
 
@@ -158,3 +159,81 @@ Best practices: Aspect and Advices
 	1 create target object: AccountDAO
 	2 create main App
 	3 create Aspect with @Before advice
+	
+Pointcut Expressions
+ 
+	Pointcut: A predicate expression for where advice should be applied
+	
+	Spring AOP uses AspectJ's pointcut expression language
+	
+	- We will start with execution pointcuts
+		- Applies to execution of methods
+	
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	POINTCUT EXPRESSION PATTERN 
+	
+	execution(modifiers-pattern? return-type-pattern declaring-type-pattern? method-name-pattern(param-pattern) throws-pattern?)
+	
+		- Modifiers: public, protected and (default/none: package-visible)
+		- Return type: void, boolean, String, List<Customer>,...
+		- Declaring type: the class name
+		- Method name: Method name to match
+		- Param pattern: Parameter types to match
+		- Throws pattern: Exeption types to match
+	
+	if something has a "?" it's optional. so the modifiers-pattern, declaring-type-pattern, throws-pattern is optional. 
+	
+	EXAMPLES 
+		
+		Match on method names:
+			Match only addAccount() method in AccountDAO class
+				@Before("execution void com.mathiasdarex.aopdemo.dao.AccountDAO.addAccount")     <- modifier+returnType+DeclaringType+Method
+			
+			Match any addAccount() method in ANY class
+				@Before("execution(public void addAccount())")    <- modifier+returnType+method
+			
+			
+			Match on method names (using wildcards)
+			Match methods starting with "add" in any class
+				@Before("execution(public void add*())")          <- modifier+returnType+method
+				
+			Match methods starting with processCreditCard in any class
+				@Before("execution(public VerificationResult processCreditCard*())")
+				
+				
+			We can loosen a bit, by using wildcards on return type
+				@Before("execution(public * processCreditCard*())")   <- any return type
+				
+			The modifier is optional, so we don't need to list it
+				@Before("execution(* processCreditCard*())")
+				
+	Parameter Pattern Wildcards
+		
+		For param-pattern
+			
+			() - matchbes a method with no arguments
+			
+			(*) - matches a method with one argument of any type
+			
+			(..) - matches a method with 0 or more arguments of any type
+			
+	Pointcut Expression EXAMPLES
+		
+		match on method parameters:
+		
+			Match addAccount methods with no arguments:
+				@Before("execution(* addAccount())")
+			
+			Match addAccount methods that have Account param:
+				@Before("execution(* addAccount(com.mathiasdarex.aopdemo.Account))")
+			
+		match on method parameters (using wildcards):
+			
+			Match addAccount methods with any number of arguments:
+				@Before("execution(* addAccount(..))")
+		...............................
+		
+		Match on methods in a PACKAGE
+			
+			Match any method in our DAO package: com.mathiasdarex.aopdemo.dao:
+				@Before("execution(* com.mathiasdarex.aopdemo.dao.*.*(..))")
