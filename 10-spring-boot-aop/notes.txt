@@ -242,4 +242,16 @@ Pointcut Expressions
 				@Before("execution(* add*(com.mathiasdarex.aopdemo.Account))")
 				
 			Match method with "Account" Param and more Param type
+				@Before("execution(* add*(com.mathiasdarex.aopdemo.Account, ..))")
 				
+			Match method with ANY parameters
+				@Before("execution(* add*(..))")
+			if using intelliJ ultimate, we may have to narrow out the pointcut expression to our packages only:
+				@Before("execution(* com.mathiasdarex..add*(..))")
+			
+			Match any method in a specific package, any class, any return value, any param
+			(Return type: any(*), in Package dao, any class, any method, any param)
+				@Before("execution(* com.mathiasdarex.aopdemo.dao.*.*(..))")
+		...............................
+		
+	AOP Pointcut declarations

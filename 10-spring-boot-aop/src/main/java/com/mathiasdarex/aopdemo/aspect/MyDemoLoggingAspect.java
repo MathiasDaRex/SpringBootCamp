@@ -26,7 +26,19 @@ public class MyDemoLoggingAspect {
     // @Before("execution(* add*())")
 
     // Match method with "Account" Param type
-    @Before("execution(* add*(com.mathiasdarex.aopdemo.Account))")
+    // @Before("execution(* add*(com.mathiasdarex.aopdemo.Account))")
+
+    // Match method with "Account" Param and more Param types
+    // @Before("execution(* add*(com.mathiasdarex.aopdemo.Account, ..))")
+
+    // Match method with ANY parameters
+    // @Before("execution(* add*(..))")
+    // if using intelliJ ultimate, we may have to narrow out the pointcut expression to our packages only:
+    // @Before("execution(* com.mathiasdarex..add*(..))")
+
+    // Match methods in a package
+    // Return type: any(*), in Package dao, any class, any method, any param
+    @Before("execution(* com.mathiasdarex.aopdemo.dao.*.*(..))")
     public void beforeAddAccountAdvice() {
         x++;
         System.out.println("\n========>>>>>>> Executing @Before advice on method");
