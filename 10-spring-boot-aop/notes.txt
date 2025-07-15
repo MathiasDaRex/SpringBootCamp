@@ -253,5 +253,52 @@ Pointcut Expressions
 			(Return type: any(*), in Package dao, any class, any method, any param)
 				@Before("execution(* com.mathiasdarex.aopdemo.dao.*.*(..))")
 		...............................
-		
+	02.	
 	AOP Pointcut declarations
+	
+		Problem: How can we reuse a pointcut expression?
+			(we want to apply to multiple advices)
+			
+		Could just copy/paste, but that's not pretty.
+		
+		Ideal solution: 
+			
+			- Create a pointcut declaration once
+			
+			- Apply it to multiple advices
+			
+		Benefits: 
+			Easily reuse pointcut expressions
+			
+			Update pointcut in one location
+			
+			Can also share and combine pointcut expressions (coming later)
+	
+	Combining pointcuts:
+		
+		Problem: How to apply multiple pointcut expressions to a single advice
+		
+		Execute an advice only if certain conditions are met
+		
+		for example: All methods in a package EXCEPT getter/setter methods
+		
+		WE CAN COMBINE POINTCUT EXPRESSIONS, USING LOGIC OPERATORS
+		
+			- AND(&&)
+			- OR (||)
+			- NOT(!)
+		
+		COMBINING POINTCUT EXPRESSIONS:
+			
+			works like an "if" statement
+			
+			execution happens only if it evaluates to true
+			
+			example: All methods in a package EXCEPT getter/setter methods.
+			
+			devProcess: 1 - create pointcut declarations
+						2 - combine pointcut declarations
+						3 - apply pointcut declaration to advice(s)
+			
+		in 02 we Matched methods in a DAO package and EXCLUDED getter/setter methods. they still executed, 
+		but the advices are NOT being applied on them.

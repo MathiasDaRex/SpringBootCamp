@@ -26,14 +26,15 @@ public class AopdemoApplication {
 		// call the business method
 		Account myAccount = new Account();
 		theAccountDAO.addAccount(myAccount, true);
-
-
-		// call the membership business method
-		theMembershipDAO.addAccount();
-
-		theMembershipDAO.addSillyMember(1, 2);
-
 		theAccountDAO.doWork();
+
+		// call accountDAO getter/setter methods
+		theAccountDAO.setName("foobar");
+		theAccountDAO.setServiceCode("silver");
+
+		String name = theAccountDAO.getName();
+		String code = theAccountDAO.getServiceCode();
+
 		theMembershipDAO.goToSleep();
 	}
 
