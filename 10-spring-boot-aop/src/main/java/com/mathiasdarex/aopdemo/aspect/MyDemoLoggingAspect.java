@@ -15,11 +15,21 @@ public class MyDemoLoggingAspect {
 
     //
 
-    @Before("execution(public void addAccount())")
+    // match addAccount method only in accountDAO class
+    //@Before("execution(public void com.mathiasdarex.aopdemo.dao.AccountDAO.addAccount())")
+    //
 
+    // match method starting with "add" in any class
+    //@Before("execution(public void add*())")
+
+    // matching any return type (modifier (public) is optional, if we have all, we don't need to add * to the beginning)
+    // @Before("execution(* add*())")
+
+    // Match method with "Account" Param type
+    @Before("execution(* add*(com.mathiasdarex.aopdemo.Account))")
     public void beforeAddAccountAdvice() {
         x++;
-        System.out.println("\n========>>>>>>> Executing @Before advice on addAccount()");
+        System.out.println("\n========>>>>>>> Executing @Before advice on method");
         System.out.println("Times run: " + x);
 
     }
