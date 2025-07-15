@@ -237,3 +237,9 @@ Pointcut Expressions
 			
 			Match any method in our DAO package: com.mathiasdarex.aopdemo.dao:
 				@Before("execution(* com.mathiasdarex.aopdemo.dao.*.*(..))")
+				
+			Match method with "Account" Param type
+				@Before("execution(* add*(com.mathiasdarex.aopdemo.Account))")
+				
+			Match method with "Account" Param and more Param type
+				
